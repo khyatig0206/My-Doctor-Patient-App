@@ -1,0 +1,30 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "build_files.sh",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "public"
+        }
+      },
+      {
+        "src": "mediSys/wsgi.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/static/(.*)",
+        "dest": "/public/static/$1"
+      },
+      {
+        "src": "/media/(.*)",
+        "dest": "/public/static/$1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "mediSys/wsgi.py"
+      }
+    ]
+  }
