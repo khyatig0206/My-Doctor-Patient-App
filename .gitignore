@@ -1,5 +1,5 @@
 
-_pycache__/
+*/_pycache__/*
 
 .venv/
 
