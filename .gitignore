@@ -1,0 +1,14 @@
+
+_pycache__/
+
+.venv/
+
+*.db
+
+db.sqlite3
+
+*/migrations/*
+
+*.log
+
+
