@@ -2,9 +2,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import Profile,CustomUser
+from .models import Profile,CustomUser,BlogPost,Category
 from django.contrib.auth import authenticate, login, logout
-import time
+from .forms import BlogPostForm
+
 # Create your views here.
 def login_page(request):
     if request.method == 'POST':
@@ -16,7 +17,7 @@ def login_page(request):
             login(request, user)
             return redirect('dashboard')
         else:
-            messages.error(request, "Invalid username or password.")
+            messages.warning(request, "Invalid username or password.")
             return HttpResponseRedirect(request.path_info)
     
     return render(request, 'account/login.html')
@@ -66,3 +67,28 @@ def dashboard(request):
 def logout_page(request):
     logout(request)
     return redirect('login_page')
+
+def create_blog_post(request):
+    if request.method == 'POST':
+        form = BlogPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            blog_post = form.save(commit=False)
+            blog_post.author = request.user  # Set the author field here
+            if 'save_as_draft' in request.POST:
+                blog_post.draft = True
+            else:
+                blog_post.draft = False
+            blog_post.save()
+            return redirect('dashboard')
+    else:
+        form = BlogPostForm()
+    return render(request, 'blog/blog_create.html', {'form': form})
+
+
+def view_blog_posts(request):
+    blog_posts = BlogPost.objects.filter(draft=False).order_by('created_at')
+    user=request.user
+    
+    blog_drafts=BlogPost.objects.filter(draft=True,author=request.user).order_by('created_at')
+    
+    return render(request, 'blog/blog_view.html', {'blog_posts': blog_posts,'blog_drafts':blog_drafts})

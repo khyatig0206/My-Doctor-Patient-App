@@ -1,0 +1,51 @@
+{% extends "base/base.html" %}
+{% load custom_filters %}
+{% block start %}
+
+{% if blog_drafts %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Your Drafts</h2>
+    <div class="row">
+        
+        {% for blog_post in blog_drafts %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                {% if blog_post.image %}
+                <img src="{{ blog_post.image.url }}" class="card-img-top" alt="{{ blog_post.title }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ blog_post.title }}</h5>
+                    <p class="card-text">{{ blog_post.summary|truncate_words:15 }}</p>
+                    <a href="#" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<hr>
+{% endif %}
+
+<section class="section-content padding-y ">
+    <div class="container mt-1">
+        <h2 class="text-center mb-4">All Blogs</h2>
+        <div class="row">
+            {% for blog_post in blog_posts %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    {% if blog_post.image %}
+                    <img src="{{ blog_post.image.url }}" class="card-img-top" alt="{{ blog_post.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ blog_post.title }}</h5>
+                        <p class="card-text">{{ blog_post.summary|truncate_words:15 }}</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

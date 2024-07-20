@@ -23,6 +23,13 @@
                         <div class="border p-2 mb-2"><strong>City:</strong> {{profile.city}}</div>
                         <div class="border p-2 mb-2"><strong>State:</strong> {{profile.state}}</div>
                         <div class="border p-2 mb-2"><strong>Pincode:</strong> {{profile.pincode}}</div>
+                        {%if user.is_patient%}
+                        <p> <a href="{% url 'view_blog_posts' %}" class="btn btn-primary"> <i class="fa-solid fa-blog"></i> View Blogs  </a></p>
+                        {%endif%}
+
+                        {%if user.is_doctor%}
+                        <p> <a href="{% url 'create_blog_post' %}" class="btn btn-primary mr-2"> <i class="fa-solid fa-pen"></i> Create Blog  </a><a href="{% url 'view_blog_posts' %}" class="btn btn-primary ml-2"> <i class="fa-solid fa-blog"></i> View Blog  </a></p>
+                        {%endif%}
                         <p class="text-center mt-4"> <a href='{% url "logout_page" %}'>Logout</a></p>
                     </div>
                 </div>
