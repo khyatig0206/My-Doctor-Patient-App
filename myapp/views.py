@@ -177,11 +177,11 @@ def create_google_calendar_event(request, appointment):
         'description': appointment.speciality,
         'start': {
             'dateTime': start_datetime.isoformat(),
-            'timeZone': 'UTC',
+            'timeZone': 'IST',
         },
         'end': {
             'dateTime': end_datetime.isoformat(),
-            'timeZone': 'UTC',
+            'timeZone': 'IST',
         },
         'attendees': [
             {'email': appointment.doctor.email},
