@@ -24,7 +24,16 @@
                         <div class="border p-2 mb-2"><strong>State:</strong> {{profile.state}}</div>
                         <div class="border p-2 mb-2"><strong>Pincode:</strong> {{profile.pincode}}</div>
                         {%if user.is_patient%}
-                        <p> <a href="{% url 'view_blog_posts' %}" class="btn btn-primary"> <i class="fa-solid fa-blog"></i> View Blogs  </a></p>
+                        <p> <a href="{% url 'view_blog_posts' %}" class="btn btn-primary mr-2"> <i class="fa-solid fa-blog"></i> View Blogs  </a><a href="{% url 'doctors_view' %}" class="btn btn-primary ml-2"> <i class="fa-solid fa-user-doctor"></i> View Doctors  </a></p>
+                        
+                        {% if user.appointments.exists %}
+                        <p>
+                            <a href="{% url 'view_appointments' %}" class="btn btn-primary mr-2">
+                                <i class="fa-solid fa-calendar"></i> View Appointments
+                            </a>
+                        </p>
+                        {% endif %}
+
                         {%endif%}
 
                         {%if user.is_doctor%}

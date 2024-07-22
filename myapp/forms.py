@@ -1,5 +1,5 @@
 from django import forms
-from .models import BlogPost
+from .models import BlogPost,Appointment
 
 class BlogPostForm(forms.ModelForm):
     class Meta:
@@ -14,4 +14,13 @@ class BlogPostForm(forms.ModelForm):
             
         }
     
-     
+
+class AppointmentForm(forms.ModelForm):
+    class Meta:
+        model = Appointment
+        fields = ['speciality', 'date', 'start_time']
+        widgets = {
+            'speciality':forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter required Speciality'}),
+            'date': forms.DateInput(attrs={'class': 'form-control','type': 'date'}),
+            'start_time': forms.TimeInput(attrs={'class': 'form-control','type': 'time'}),
+        }

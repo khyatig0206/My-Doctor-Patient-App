@@ -9,10 +9,10 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-from decouple import Config
+
 from pathlib import Path
 import os
-config = Config()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR=os.path.join(BASE_DIR,'templates')
@@ -26,7 +26,10 @@ SECRET_KEY = 'django-insecure-i2%u+mu2hr+!jxi=viupuqp49x=p!8xljt#@c2x5j-r%^k((^!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = []
+
+
 
 
 # Application definition
@@ -38,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myapp'
+    'myapp',
+    
 ]
 
 MIDDLEWARE = [
@@ -85,11 +89,11 @@ WSGI_APPLICATION = 'mediSys.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT'),
+        'NAME': '#',
+        'USER': 'root',
+        'PASSWORD': '#',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 # Password validation

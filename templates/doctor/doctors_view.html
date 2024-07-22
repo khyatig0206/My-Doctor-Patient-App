@@ -1,0 +1,29 @@
+{% extends "base/base.html" %}
+{% block start %}
+
+<style>
+    .card-custom-width {
+        width: 18rem; 
+    }
+</style>
+
+<section class="section-content padding-y">
+    <div class="container mt-1">
+        <h2 class="text-center mb-4">All Doctors</h2>
+        <div class="row justify-content-center">
+            {% for profile in profiles %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm text-center card-custom-width mx-auto">
+                    <img src="{{ profile.profile_picture.url }}" class="rounded-circle  mt-2 mx-auto d-block" width="150" alt="profile">
+                    <div class="card-body">
+                        <h5 class="card-title">Dr. {{ profile.user.get_full_name }}</h5>
+                        <a href="{% url 'book_appointment' profile.id %}" class="btn btn-primary">Book Appointment</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}
